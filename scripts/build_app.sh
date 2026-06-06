@@ -2,10 +2,12 @@
 set -eu
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-APP_NAME="MacMultiOpen"
+APP_BUNDLE_NAME="微信多开工具"
+EXECUTABLE_NAME="微信多开工具"
 PRODUCT="MacMultiOpenApp"
 DIST_DIR="$ROOT_DIR/dist"
-APP_DIR="$DIST_DIR/$APP_NAME.app"
+APP_DIR="$DIST_DIR/$APP_BUNDLE_NAME.app"
+LEGACY_APP_DIR="$DIST_DIR/MacMultiOpen.app"
 CONTENTS_DIR="$APP_DIR/Contents"
 MACOS_DIR="$CONTENTS_DIR/MacOS"
 RESOURCES_DIR="$CONTENTS_DIR/Resources"
@@ -16,13 +18,13 @@ cd "$ROOT_DIR"
 swift build -c release --product "$PRODUCT" --arch arm64
 swift build -c release --product "$PRODUCT" --arch x86_64
 
-rm -rf "$APP_DIR"
+rm -rf "$APP_DIR" "$LEGACY_APP_DIR"
 mkdir -p "$MACOS_DIR" "$RESOURCES_DIR"
 lipo -create \
     ".build/arm64-apple-macosx/release/$PRODUCT" \
     ".build/x86_64-apple-macosx/release/$PRODUCT" \
-    -output "$MACOS_DIR/$APP_NAME"
-chmod +x "$MACOS_DIR/$APP_NAME"
+    -output "$MACOS_DIR/$EXECUTABLE_NAME"
+chmod +x "$MACOS_DIR/$EXECUTABLE_NAME"
 cp "$APP_ICON" "$RESOURCES_DIR/AppIcon.icns"
 
 cat > "$CONTENTS_DIR/Info.plist" <<PLIST
@@ -35,7 +37,7 @@ cat > "$CONTENTS_DIR/Info.plist" <<PLIST
     <key>CFBundleDisplayName</key>
     <string>微信多开工具</string>
     <key>CFBundleExecutable</key>
-    <string>MacMultiOpen</string>
+    <string>$EXECUTABLE_NAME</string>
     <key>CFBundleIdentifier</key>
     <string>local.codex.macmultiopen.app</string>
     <key>CFBundleIconFile</key>

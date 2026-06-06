@@ -59,10 +59,12 @@ jobs:
       - name: Verify package
         run: |
           test -f "$PKG_PATH"
-          /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" dist/MacMultiOpen.app/Contents/Info.plist | grep "^$VERSION$"
-          lipo -info dist/MacMultiOpen.app/Contents/MacOS/MacMultiOpen | grep "x86_64 arm64"
-          codesign --verify --strict dist/MacMultiOpen.app
-          pkgutil --payload-files "$PKG_PATH" | grep "Applications/微信多开工具.app/Contents/MacOS/MacMultiOpen"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "dist/微信多开工具.app/Contents/Info.plist" | grep "^$VERSION$"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleName" "dist/微信多开工具.app/Contents/Info.plist" | grep "^微信多开工具$"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleExecutable" "dist/微信多开工具.app/Contents/Info.plist" | grep "^微信多开工具$"
+          lipo -info "dist/微信多开工具.app/Contents/MacOS/微信多开工具" | grep "x86_64 arm64"
+          codesign --verify --strict "dist/微信多开工具.app"
+          pkgutil --payload-files "$PKG_PATH" | grep "Applications/微信多开工具.app/Contents/MacOS/微信多开工具"
           installer -pkg "$PKG_PATH" -target / -showChoicesXML >/dev/null
 
       - name: Create GitHub release
