@@ -48,34 +48,6 @@ dist/微信多开工具-0.1.0-universal.pkg
 /Applications/微信多开工具.app
 ```
 
-## 自动 Release
-
-`main` 分支有构建相关提交后，GitHub Actions 会自动运行测试、打包 universal `.pkg`，并创建 GitHub Release。
-
-自动 Release 的版本号会基于最新 `vX.Y.Z` release tag 递增：每次 patch +1；patch 到 99 后，minor +1 且 patch 归 0。当前基准是 `0.1.0`，下一次自动发布为 `0.1.1`。
-
-Release 标题格式：
-
-```text
-微信多开工具 0.1.1
-```
-
-Release 里的安装包文件名格式：
-
-```text
-WeChatMutiOpen-0.1.1-universal.pkg
-```
-
-自动触发范围：
-
-- `.github/workflows/release.yml`
-- `Package.swift`
-- `Resources/**`
-- `Sources/**`
-- `scripts/**`
-
-也可以在 GitHub Actions 页面手动运行 `Build Release`。
-
 ## CLI
 
 ```sh
