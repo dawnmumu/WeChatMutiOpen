@@ -2,6 +2,8 @@
 
 一个本地 macOS 多开工具，用来创建微信、企业微信的独立分身 App。
 
+![微信多开工具界面](docs/screenshot.png)
+
 ## 功能
 
 - 自动发现 `/Applications` 和 `~/Applications` 中的微信、企业微信。
