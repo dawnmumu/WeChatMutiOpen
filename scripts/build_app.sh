@@ -12,7 +12,6 @@ RESOURCES_DIR="$CONTENTS_DIR/Resources"
 APP_ICON="$ROOT_DIR/Resources/AppIcon.icns"
 
 cd "$ROOT_DIR"
-swift scripts/generate_app_icon.swift "$ROOT_DIR" >/dev/null
 swift build -c release --product "$PRODUCT" --arch arm64
 swift build -c release --product "$PRODUCT" --arch x86_64
 

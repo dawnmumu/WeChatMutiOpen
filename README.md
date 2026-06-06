@@ -22,11 +22,7 @@ sh scripts/build_app.sh
 sh scripts/package_installer.sh
 ```
 
-应用图标由脚本生成：
-
-```sh
-swift scripts/generate_app_icon.swift .
-```
+应用图标使用固定资源 `Resources/AppIcon.icns`，打包时直接复制到 `.app`。
 
 打包后的应用位于：
 
