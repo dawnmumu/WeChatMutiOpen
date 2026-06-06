@@ -2,7 +2,7 @@
 set -eu
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-VERSION="0.1.0"
+VERSION="${VERSION:-0.1.0}"
 BUNDLE_IDENTIFIER="local.codex.macmultiopen.app"
 PACKAGE_IDENTIFIER="local.codex.macmultiopen.installer"
 APP_SOURCE="$ROOT_DIR/dist/MacMultiOpen.app"
@@ -13,7 +13,7 @@ PACKAGE_PATH="$DIST_DIR/微信多开工具-$VERSION-universal.pkg"
 SIGNING_IDENTITY="${SIGNING_IDENTITY:-}"
 
 cd "$ROOT_DIR"
-sh scripts/build_app.sh >/dev/null
+VERSION="$VERSION" sh scripts/build_app.sh >/dev/null
 
 rm -rf "$PACKAGE_ROOT"
 rm -f "$PACKAGE_PATH"
