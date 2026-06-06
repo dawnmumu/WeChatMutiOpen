@@ -59,3 +59,7 @@ dist/微信多开工具-0.1.0-universal.pkg
 ## 说明
 
 这个项目不破解、不修改微信原始安装包；它会复制源 App，改写副本的 `CFBundleIdentifier`、显示名和 URL schemes，然后只对外层 App 做本地签名。微信升级后可以对已有分身执行“更新”来重新复制当前版本，并保留分身名称和自定义图标。
+
+## License
+
+Apache License 2.0. See [LICENSE](LICENSE).
