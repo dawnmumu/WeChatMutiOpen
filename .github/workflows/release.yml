@@ -1,0 +1,61 @@
+name: Build Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/release.yml"
+      - "Package.swift"
+      - "Resources/**"
+      - "Sources/**"
+      - "scripts/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    name: Build installer package
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          swift --version
+          xcodebuild -version
+          gh --version
+
+      - name: Run tests
+        run: swift run MultiOpenTests
+
+      - name: Build installer
+        run: sh scripts/package_installer.sh
+
+      - name: Verify package
+        run: |
+          test -f "dist/微信多开工具-0.1.0-universal.pkg"
+          lipo -info dist/MacMultiOpen.app/Contents/MacOS/MacMultiOpen | grep "x86_64 arm64"
+          codesign --verify --strict dist/MacMultiOpen.app
+          pkgutil --payload-files "dist/微信多开工具-0.1.0-universal.pkg" | grep "Applications/微信多开工具.app/Contents/MacOS/MacMultiOpen"
+          installer -pkg "dist/微信多开工具-0.1.0-universal.pkg" -target / -showChoicesXML >/dev/null
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          SHORT_SHA="${GITHUB_SHA::7}"
+          TAG="build-${GITHUB_RUN_NUMBER}-${SHORT_SHA}"
+          PKG_PATH="dist/微信多开工具-0.1.0-universal.pkg"
+          gh release create "$TAG" "$PKG_PATH" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "微信多开工具 $TAG" \
+            --notes "Automated universal macOS package built from commit ${GITHUB_SHA}."

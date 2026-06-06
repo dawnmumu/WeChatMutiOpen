@@ -42,6 +42,20 @@ dist/微信多开工具-0.1.0-universal.pkg
 /Applications/微信多开工具.app
 ```
 
+## 自动 Release
+
+`main` 分支有构建相关提交后，GitHub Actions 会自动运行测试、打包 universal `.pkg`，并创建 GitHub Release。
+
+自动触发范围：
+
+- `.github/workflows/release.yml`
+- `Package.swift`
+- `Resources/**`
+- `Sources/**`
+- `scripts/**`
+
+也可以在 GitHub Actions 页面手动运行 `Build Release`。
+
 ## CLI
 
 ```sh
