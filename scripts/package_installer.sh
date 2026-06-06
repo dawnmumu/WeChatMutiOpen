@@ -5,7 +5,7 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 VERSION="${VERSION:-0.1.0}"
 BUNDLE_IDENTIFIER="local.codex.macmultiopen.app"
 PACKAGE_IDENTIFIER="local.codex.macmultiopen.installer"
-APP_SOURCE="$ROOT_DIR/dist/MacMultiOpen.app"
+APP_SOURCE="$ROOT_DIR/dist/微信多开工具.app"
 APP_INSTALL_NAME="微信多开工具.app"
 DIST_DIR="$ROOT_DIR/dist"
 PACKAGE_ROOT="$DIST_DIR/pkg-root"
@@ -50,7 +50,7 @@ fi
 
 rm -rf "$PACKAGE_ROOT"
 
-pkgutil --payload-files "$PACKAGE_PATH" | grep -q "Applications/$APP_INSTALL_NAME/Contents/MacOS/MacMultiOpen$"
+pkgutil --payload-files "$PACKAGE_PATH" | grep -q "Applications/$APP_INSTALL_NAME/Contents/MacOS/微信多开工具$"
 
 echo "$PACKAGE_PATH"
 echo "identifier: $PACKAGE_IDENTIFIER"

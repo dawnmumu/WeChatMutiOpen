@@ -35,7 +35,7 @@ VERSION=0.1.1 sh scripts/package_installer.sh
 打包后的应用位于：
 
 ```text
-dist/MacMultiOpen.app
+dist/微信多开工具.app
 ```
 
 安装包位于：
