@@ -46,6 +46,12 @@ dist/微信多开工具-0.1.0-universal.pkg
 
 `main` 分支有构建相关提交后，GitHub Actions 会自动运行测试、打包 universal `.pkg`，并创建 GitHub Release。
 
+Release 里的安装包文件名为：
+
+```text
+WeChatMutiOpen-0.1.0-universal.pkg
+```
+
 自动触发范围：
 
 - `.github/workflows/release.yml`

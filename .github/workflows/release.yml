@@ -55,7 +55,9 @@ jobs:
           SHORT_SHA="${GITHUB_SHA::7}"
           TAG="build-${GITHUB_RUN_NUMBER}-${SHORT_SHA}"
           PKG_PATH="dist/微信多开工具-0.1.0-universal.pkg"
-          gh release create "$TAG" "$PKG_PATH" \
+          RELEASE_PKG_PATH="dist/WeChatMutiOpen-0.1.0-universal.pkg"
+          cp "$PKG_PATH" "$RELEASE_PKG_PATH"
+          gh release create "$TAG" "$RELEASE_PKG_PATH" \
             --repo "$GITHUB_REPOSITORY" \
             --title "微信多开工具 $TAG" \
             --notes "Automated universal macOS package built from commit ${GITHUB_SHA}."
